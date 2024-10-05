@@ -8,6 +8,7 @@ import Header from '@/components/header'
 import Footer from '@/components/footer'
 
 import './globals.css'
+import { ClerkProvider } from '@clerk/nextjs'
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -36,22 +37,24 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang='en' className='scroll-smooth' suppressHydrationWarning>
-      <body
-        className={cn(
-          'flex min-h-screen flex-col',
-          geistSans.variable,
-          geistMono.variable,
-          inter.variable,
-          playfair.variable
-        )}
-      >
-        <Providers>
-          <Header />
-          <main className='grow'>{children}</main>
-          <Footer />
-        </Providers>
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang='en' className='scroll-smooth' suppressHydrationWarning>
+        <body
+          className={cn(
+            'flex min-h-screen flex-col',
+            geistSans.variable,
+            geistMono.variable,
+            inter.variable,
+            playfair.variable
+          )}
+        >
+          <Providers>
+            <Header />
+            <main className='grow'>{children}</main>
+            <Footer />
+          </Providers>
+        </body>
+      </html>
+    </ClerkProvider>
   )
 }

@@ -10,6 +10,8 @@ import {
 } from '@/components/ui/sheet'
 
 import { Menu } from 'lucide-react'
+import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs'
+import { Button } from './ui/button'
 
 export default function Header() {
   return (
@@ -32,12 +34,32 @@ export default function Header() {
 
         <ul className='hidden items-center gap-14 text-sm font-medium sm:flex'>
           <li className='font-serif text-lg font-bold'>
-            <Link href='/'>next</Link>
+            <Link href='/' className='font-geist text-2xl font-bold'>
+              My Template
+            </Link>
+          </li>
+          <li>
+            <Link href='/protected/server'>Protected Server</Link>
+          </li>
+          <li>
+            <Link href='/protected/client'>Protected Client</Link>
+          </li>
+          <li>
+            <Link href='/api/me'>Who am i </Link>
           </li>
         </ul>
 
         <div className='flex items-center justify-between gap-6'>
           <ThemeToggle />
+
+          <SignedOut>
+            <SignInButton>
+              <Button variant='outline'>Sign In</Button>
+            </SignInButton>
+          </SignedOut>
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
         </div>
       </nav>
     </header>
